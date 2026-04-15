@@ -45,9 +45,7 @@ From a technical standpoint, GANs can be formulated as a minimax optimization pr
 
 The training objective is defined as:
 
-\[
-\min_G \max_D \; \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p(z)}[\log(1 - D(G(z)))]
-\]
+min_G max_D E_{x ~ p_data}[log D(x)] + E_{z ~ p(z)}[log(1 - D(G(z)))]
 
 This adversarial loss encourages the generator to approximate the true data distribution implicitly by minimizing the divergence between \( p_g(x) \) and \( p_{data}(x) \), while the discriminator improves its ability to distinguish real from synthetic samples. Ideally, at equilibrium, the generator recovers the underlying data distribution such that \( p_g(x) \approx p_{data}(x) \), leading the discriminator to output \( D(x) = 0.5 \) for all inputs, indicating maximal uncertainty. However, in practice, GAN training is often unstable due to issues such as non-convergence, vanishing gradients, and mode collapse, where the generator produces limited diversity despite high realism.
 
@@ -98,11 +96,11 @@ Diffusion models can be intuitively understood as a process of gradually destroy
   <img src="images/diffusion_models_intuition.png" alt="Diffusion Models" width="900"/>
 </p>
 
-From a technical perspective, diffusion models are probabilistic generative models that learn data distributions by reversing a Markovian noising process. During the forward process, an input image \( x_0 \sim p_{data}(x) \) is gradually corrupted by adding Gaussian noise over a fixed number of time steps \( t = 1, \dots, T \), eventually transforming it into a nearly isotropic Gaussian distribution \( x_T \sim \mathcal{N}(0, I) \).
+From a technical perspective, diffusion models are probabilistic generative models that learn data distributions by reversing a Markovian noising process. During the forward process, an input image x0 ~ p_data(x) is gradually corrupted by adding Gaussian noise over a fixed number of time steps t = 1, ..., T, eventually transforming it into a nearly isotropic Gaussian distribution xT ~ N(0, I).
 
-The reverse process is learned by a neural network (typically a U-Net) that parameterizes the conditional distribution \( p_\theta(x_{t-1} \mid x_t) \), effectively learning to denoise step by step. The training objective is formulated as a variational bound, commonly simplified into predicting the added noise at each timestep.
+The reverse process is learned by a neural network (typically a U-Net) that parameterizes the conditional distribution p_theta(x_{t-1} | x_t), effectively learning to denoise step by step. The training objective is formulated as a variational bound, commonly simplified into predicting the added noise at each timestep.
 
-Once trained, sampling begins from pure noise \( x_T \) and iteratively applies the learned denoising steps to reconstruct a coherent sample from the learned data distribution. This iterative refinement process allows diffusion models to achieve highly stable training and state-of-the-art sample quality, at the cost of increased computational complexity during generation.
+Once trained, sampling begins from pure noise xT and iteratively applies the learned denoising steps to reconstruct a coherent sample from the learned data distribution. This iterative refinement process allows diffusion models to achieve highly stable training and state-of-the-art sample quality, at the cost of increased computational complexity during generation.
 
 <p align="center">
   <img src="images/diffusion.png" alt="Diffusion Models" width="800"/>
