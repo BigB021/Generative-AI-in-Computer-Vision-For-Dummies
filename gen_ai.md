@@ -1,7 +1,7 @@
 <h1 align="center">Generative AI in Computer Vision For Dummies</h1>
 
 <p align="center">
-  <img src="gen_examples.png" 
+  <img src="images/gen_examples.png" 
   alt="GenAI Cover" width="600" />
 </p>
 
@@ -26,7 +26,7 @@ One of the major challenges in computer vision is the reliance on large, labeled
 Moreover, generative models have a wide range of applications, including image synthesis, editing, restoration, and simulation. They are increasingly used in fields such as design, marketing, gaming, and film, where the ability to generate high-quality visual content is essential.
 
 <p align="center">
-  <img src="tradAi_vs_genAi.png" 
+  <img src="images/tradAi_vs_genAi.png" 
   alt="Traditional AI VS Gen AI" width="500" />
 </p>
 
@@ -38,7 +38,7 @@ Moreover, generative models have a wide range of applications, including image s
 GANs can be understood as a simple game between two neural networks: a generator and a discriminator. The generator acts like an artist, creating images from random noise, while the discriminator plays the role of a detective, trying to distinguish between real images and those produced by the generator. During training, the generator continuously improves its ability to produce realistic images in order to fool the discriminator, while the discriminator simultaneously becomes better at identifying fakes. This adversarial process pushes both networks to improve over time, until the generated images become increasingly indistinguishable from real ones. In the end, the trained generator is capable of producing high-quality, realistic images, making GANs a powerful tool in generative AI.
 
 <p align="center">
-  <img src="gan_intuition.png" alt="GANs" width="700"/>
+  <img src="images/gan_intuition.png" alt="GANs" width="700"/>
 </p>
 
 From a technical standpoint, GANs can be formulated as a minimax optimization problem where two neural networks are trained simultaneously in competition. The generator \( G(z) \) maps a random latent vector \( z \sim p(z) \) (typically Gaussian or uniform noise) into the data space, producing synthetic samples \( G(z) \). The discriminator \( D(x) \) is trained to estimate the probability that a given input \( x \) originates from the real data distribution \( p_{data}(x) \) rather than the generator distribution \( p_g(x) \).
@@ -52,7 +52,7 @@ The training objective is defined as:
 This adversarial loss encourages the generator to approximate the true data distribution implicitly by minimizing the divergence between \( p_g(x) \) and \( p_{data}(x) \), while the discriminator improves its ability to distinguish real from synthetic samples. Ideally, at equilibrium, the generator recovers the underlying data distribution such that \( p_g(x) \approx p_{data}(x) \), leading the discriminator to output \( D(x) = 0.5 \) for all inputs, indicating maximal uncertainty. However, in practice, GAN training is often unstable due to issues such as non-convergence, vanishing gradients, and mode collapse, where the generator produces limited diversity despite high realism.
 
 <p align="center">
-  <img src="gan.png" alt="GANs" width="700"/>
+  <img src="images/gan.png" alt="GANs" width="600"/>
 </p>
 
 
@@ -70,13 +70,13 @@ Over time, the model can generate completely new outfits that look like real pho
 VAEs can be understood as a system that learns to compress and recreate images in a meaningful way. Imagine a machine that takes a picture of a cat and squeezes it into a small, fuzzy description, something like “small, furry, pointy ears,” but with a bit of uncertainty. This compressed representation doesn’t store exact details but instead captures the general essence of the image. A second part of the system then uses this description to reconstruct the image, producing something that looks like the original cat, even if not perfectly identical. Because the representation is smooth and continuous, similar descriptions lead to similar images. This means we can also generate entirely new images by sampling random descriptions and feeding them into the system, allowing VAEs to create new, realistic variations rather than simply memorizing existing data.
 
 <p align="center">
-  <img src="vae_intuition.png" alt="VAEs" width="700"/>
+  <img src="images/vae_intuition.png" alt="VAEs" width="700"/>
 </p>
 
 Variational Autoencoders are generative models that learn to compress images into a structured **latent** space and reconstruct them back. A VAE consists of two main components: an encoder, which maps an input image to a distribution in a lower-dimensional latent space, and a decoder, which reconstructs the image from this latent representation. Unlike traditional autoencoders that map inputs to fixed codes, VAEs model uncertainty by encoding inputs as probability distributions, ensuring that similar inputs are mapped to nearby regions in the latent space. This results in a smooth and continuous representation of the data, allowing new images to be generated by sampling random points from the latent space and passing them through the decoder. As a result, VAEs provide a principled way to both learn meaningful representations and generate realistic data.
 
 <p align="center">
-  <img src="Reparameterized_Variational_Autoencoder.png" alt="Reparametrized VAE" width="600"/>
+  <img src="images/Reparameterized_Variational_Autoencoder.png" alt="Reparametrized VAE" width="600"/>
 </p>
 
 **Concrete Example**
@@ -95,7 +95,7 @@ Diffusion models can be intuitively understood as a process of gradually destroy
 
 
 <p align="center">
-  <img src="diffusion_models_intuition.png" alt="Diffusion Models" width="800"/>
+  <img src="images/diffusion_models_intuition.png" alt="Diffusion Models" width="900"/>
 </p>
 
 From a technical perspective, diffusion models are probabilistic generative models that learn data distributions by reversing a Markovian noising process. During the forward process, an input image \( x_0 \sim p_{data}(x) \) is gradually corrupted by adding Gaussian noise over a fixed number of time steps \( t = 1, \dots, T \), eventually transforming it into a nearly isotropic Gaussian distribution \( x_T \sim \mathcal{N}(0, I) \).
@@ -105,7 +105,7 @@ The reverse process is learned by a neural network (typically a U-Net) that para
 Once trained, sampling begins from pure noise \( x_T \) and iteratively applies the learned denoising steps to reconstruct a coherent sample from the learned data distribution. This iterative refinement process allows diffusion models to achieve highly stable training and state-of-the-art sample quality, at the cost of increased computational complexity during generation.
 
 <p align="center">
-  <img src="diffusion.png" alt="Diffusion Models" width="800"/>
+  <img src="images/diffusion.png" alt="Diffusion Models" width="800"/>
 </p>
 
 
@@ -126,7 +126,7 @@ Generative Adversarial Networks (GANs), Variational Autoencoders (VAEs), and Dif
 | Model      | Core Idea                              | How it Works                                      | Advantages                              | Limitations                              |
 |------------|----------------------------------------|--------------------------------------------------|------------------------------------------|-------------------------------------------|
 | GAN        | Adversarial game (Generator vs Discriminator) | Generates data by fooling a discriminator        | Very realistic and sharp images          | Hard to train, unstable, mode collapse    |
-| VAE        | Probabilistic encoding in latent space | Encodes input -> samples latent space → decodes   | Stable training, interpretable latent space | Blurry outputs, less sharp details        |
+| VAE        | Probabilistic encoding in latent space | Encodes input -> samples latent space -> decodes   | Stable training, interpretable latent space | Blurry outputs, less sharp details        |
 | Diffusion  | Gradual denoising process              | Learns to remove noise step-by-step from data    | High-quality, diverse, and realistic outputs | Slow generation, computationally expensive |
 
 ---
