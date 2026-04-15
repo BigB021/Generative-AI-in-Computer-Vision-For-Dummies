@@ -45,7 +45,9 @@ From a technical standpoint, GANs can be formulated as a minimax optimization pr
 
 The training objective is defined as:
 
-min_G max_D E_{x ~ p_data}[log D(x)] + E_{z ~ p(z)}[log(1 - D(G(z)))]
+$$
+\min_{G} \max_{D} V(D, G) = \mathbb{E}_{x \sim p_{data}(x)} [\log D(x)] + \mathbb{E}_{z \sim p_{z}(z)} [\log(1 - D(G(z)))]
+$$
 
 This adversarial loss encourages the generator to approximate the true data distribution implicitly by minimizing the divergence between \( p_g(x) \) and \( p_{data}(x) \), while the discriminator improves its ability to distinguish real from synthetic samples. Ideally, at equilibrium, the generator recovers the underlying data distribution such that \( p_g(x) \approx p_{data}(x) \), leading the discriminator to output \( D(x) = 0.5 \) for all inputs, indicating maximal uncertainty. However, in practice, GAN training is often unstable due to issues such as non-convergence, vanishing gradients, and mode collapse, where the generator produces limited diversity despite high realism.
 
